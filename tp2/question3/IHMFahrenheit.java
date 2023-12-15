@@ -6,16 +6,20 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class IHMFahrenheit extends JFrame implements ActionListener{
-  private JTextField entree = new JTextField( 6 );
-  /** Le bouton de conversion. */
-  private JButton  boutonDeConversion = new JButton( "convertir" );
-  /** La sortie en degré Celsius. */
-  private JTextField sortie = new JTextField( 6 );
+    /** L'entree en degre Fahrenheit */
+    private JTextField entree = new JTextField( 6 );
+  
+    /** Le bouton de conversion. */
+    private JButton boutonDeConversion = new JButton( "convertir" );
+  
+    /** La sortie en degré Celsius. */
+    private JTextField sortie = new JTextField( 6 );
 
   public IHMFahrenheit(){
     super("IHM Fahrenheit");
  
     setLayout(new FlowLayout());
+
     add( entree ); add( boutonDeConversion ); add( sortie );
     sortie.setEditable( false );
     getContentPane().setBackground( Color.pink );
@@ -30,20 +34,30 @@ public class IHMFahrenheit extends JFrame implements ActionListener{
    * remarquer que le champs de droite (les degrés Celsius) n'est pas éditable.
    * @param ae l'événement transmis
    */
-  public void actionPerformed( ActionEvent ae ){
-    try{
-      int fahrenheit = 0; // valeur est une String et doit être convertie en entier, voir java.lang.Integer méthode parseInt (--> try/catch)
-      float celsius = 0F; // à compléter, en appelant la méthode ad'hoc de la question2 
-      // un test ici pour le zéro absolu (-273.1)
+  public void actionPerformed( ActionEvent ae ) {
+    try {
+        // valeur est une String et doit être convertie en entier, voir java.lang.Integer
+        // méthode parseInt (--> try/catch)
+        int fahrenheit = Integer.parseInt(entree.getText());
+        
+        // à compléter, en appelant la méthode ad'hoc de la question2 
+        float celsius = question1.FahrenheitCelsius.fahrenheitEnCelsius( fahrenheit );
+        
+        // un test ici pour le zéro absolu (-273.1)
+        celsius = (float) (
+            (celsius < -273.1)
+                ? -273.1
+                : (int)(celsius*10.0) / 10.0
+        );
 
-      sortie.setText( Float.toString( celsius));
-    }catch(NumberFormatException nfe){
-      sortie.setText("error ! ");
+        sortie.setText( Float.toString( celsius ) );
+    } catch ( NumberFormatException nfe ) {
+        sortie.setText("error !");
     }
   }
   
   
-  public static void main(String[] args){
+  public static void main(String[] args) {
       new IHMFahrenheit();
-    }
+  }
 }

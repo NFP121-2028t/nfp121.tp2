@@ -27,12 +27,10 @@ package question2;
  */
 public class FahrenheitCelsiusTest extends junit.framework.TestCase
 {
-    // Définissez ici les variables d'instance nécessaires à vos engagements;
-    // Vous pouvez également les saisir automatiquement du présentoir
-    // à l'aide du menu contextuel "Présentoir --> Engagements".
-    // Notez cependant que ce dernier ne peut saisir les objets primitifs
-    // du présentoir (les objets sans constructeur, comme int, float, etc.).
-
+    question2.FahrenheitCelsius f1;
+    question2.FahrenheitCelsius f2;
+    question2.FahrenheitCelsius f3;
+        
     /**
      * Constructeur de la classe-test FahrenheitCelsiusTest
      */
@@ -47,8 +45,9 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      */
     protected void setUp() // throws java.lang.Exception
     {
-        // Initialisez ici vos engagements
-
+        f1 = new question2.FahrenheitCelsius();
+        f2 = new question2.FahrenheitCelsius();
+        f3 = new question2.FahrenheitCelsius();
     }
 
     /**
@@ -58,7 +57,7 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      */
     protected void tearDown() // throws java.lang.Exception
     {
-        //Libérez ici les ressources engagées par setUp()
+        
     }
 
     /**
@@ -68,5 +67,12 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      * Par convention, leurs noms devraient débuter par "test".
      * Vous pouvez ébaucher le corps grâce au menu contextuel "Enregistrer une méthode de test".
      */
-
+    public void test_FahrenheitEnCelsius()
+    {
+        assertEquals(" 2006 °F -> 1096.6 °C ?", 1096.6, f1.fahrenheitEnCelsius(2006), 0.1);
+        assertEquals("   54 °F -> 12.2 °C ?", 12.2, f2.fahrenheitEnCelsius(54), 0.1);
+    }
 }
+
+
+
