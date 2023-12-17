@@ -84,7 +84,10 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      * Vous pouvez ébaucher le corps grâce au menu contextuel "Enregistrer une méthode de test".
      */
     public void test_FahrenheitEnCelsius() {
-        runTest("error : For input string: \"Z\"", new String[]{"Z"});
+        runTest("0 °F -> -17.7 °C", new String[]{"0"});
+        runTest("100 °F -> 37.7 °C", new String[]{"100"});
+        runTest("error : For input string: \"ZZ\"", new String[]{"ZZ"});
+        runTest("error : For input string: \"1.5\"", new String[]{"1.5"});
     }
     
     public void runTest(String s, String[] args) {
@@ -95,13 +98,7 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
         
         // GET MAIN RESULT
         String res = outContent.toString().trim();
-        
-        // DEBUGGING
-        /*
-        System.out.println("outContent: " + res);
-        System.out.println("s:  " + s);
-        System.out.println("Are they equal? " + s.equals(res));
-        */
+        outContent.reset();
         
         // Assertion with string
         assertEquals(s, res);
