@@ -17,7 +17,7 @@ public class FahrenheitCelsius {
            for ( int i = 0 ; i < args.length ; i++ ) {
                int fahrenheit = Integer.parseInt(args[i]);
                float celsius = fahrenheitEnCelsius( fahrenheit );
-               System.out.println(fahrenheit + "\u00B0F -> " + ((int)(celsius * 10.0)) / 10.0 + "\u00B0C");
+               System.out.println(fahrenheit + " °F -> " + ((int)(celsius * 10.0)) / 10.0 + " °C");
            }
        } catch( NumberFormatException nfe ) {
            System.out.println("error : " + nfe.getMessage());

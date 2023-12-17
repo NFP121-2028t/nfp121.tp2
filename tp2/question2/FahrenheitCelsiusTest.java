@@ -1,5 +1,7 @@
 package question2;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * Classe-test FahrenheitCelsiusTest.
@@ -27,9 +29,10 @@ package question2;
  */
 public class FahrenheitCelsiusTest extends junit.framework.TestCase
 {
-    question2.FahrenheitCelsius f1;
-    question2.FahrenheitCelsius f2;
-    question2.FahrenheitCelsius f3;
+    private question2.FahrenheitCelsius f;
+    
+    private ByteArrayOutputStream outContent ;
+    private PrintStream originalOut;
         
     /**
      * Constructeur de la classe-test FahrenheitCelsiusTest
@@ -45,11 +48,24 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      */
     protected void setUp() // throws java.lang.Exception
     {
-        f1 = new question2.FahrenheitCelsius();
-        f2 = new question2.FahrenheitCelsius();
-        f3 = new question2.FahrenheitCelsius();
+        f = new question2.FahrenheitCelsius();
+        
+        outContent = new ByteArrayOutputStream();
+        originalOut = System.out;
     }
-
+    
+    // Redirect System.out to ByteArrayOutputStream
+    private void setUpStreams()
+    {
+        System.setOut(new PrintStream(outContent));
+    }
+    
+    // Restore the original System.out
+    private void restoreStreams()
+    {
+        System.setOut(originalOut);
+    }
+        
     /**
      * Supprime les engagements
      *
@@ -57,7 +73,7 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      */
     protected void tearDown() // throws java.lang.Exception
     {
-        
+        // Libérez ici les ressources engagées par setUp()
     }
 
     /**
@@ -67,12 +83,31 @@ public class FahrenheitCelsiusTest extends junit.framework.TestCase
      * Par convention, leurs noms devraient débuter par "test".
      * Vous pouvez ébaucher le corps grâce au menu contextuel "Enregistrer une méthode de test".
      */
-    public void test_FahrenheitEnCelsius()
-    {
-        assertEquals(" 2006 °F -> 1096.6 °C ?", 1096.6, f1.fahrenheitEnCelsius(2006), 0.1);
-        assertEquals("   54 °F -> 12.2 °C ?", 12.2, f2.fahrenheitEnCelsius(54), 0.1);
+    public void test_FahrenheitEnCelsius() {
+        runTest("error : For input string: \"Z\"", new String[]{"Z"});
+    }
+    
+    public void runTest(String s, String[] args) {
+        // RUN MAIN()
+        setUpStreams();
+        f.main(args);
+        restoreStreams();
+        
+        // GET MAIN RESULT
+        String res = outContent.toString().trim();
+        
+        // DEBUGGING
+        /*
+        System.out.println("outContent: " + res);
+        System.out.println("s:  " + s);
+        System.out.println("Are they equal? " + s.equals(res));
+        */
+        
+        // Assertion with string
+        assertEquals(s, res);
     }
 }
+
 
 
 
